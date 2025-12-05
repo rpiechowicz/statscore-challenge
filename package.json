@@ -1,0 +1,11 @@
+{
+  "name": "rafalpiechowicz-statscore",
+  "version": "1.0.0",
+  "description": "Statscore coding challenge - Rafał Piechowicz",
+  "author": "Rafał Piechowicz <rpiechowicz@icloud.com>",
+  "type": "module",
+  "main": "src/app.ts",
+  "scripts": {},
+  "devDependencies": {}
+}
+
