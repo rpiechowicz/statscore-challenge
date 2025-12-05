@@ -1,4 +1,5 @@
 import useFormatName from '@/helpers/formatName'
 import useFormatScore from '@/helpers/formatScore'
+import { isValidMatch } from '@/helpers/utils'
 
-export { useFormatName, useFormatScore }
+export { isValidMatch, useFormatName, useFormatScore }
