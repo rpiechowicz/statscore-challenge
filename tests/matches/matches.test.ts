@@ -1,6 +1,6 @@
 import type { MatchDto, MatchOutputDto } from '@/types/Match.types'
 import { describe, expect, it } from 'vitest'
-import { isValidMatch, useFormatName, useFormatScore } from '@/helpers'
+import { formatMatchName, formatMatchScore, isValidMatch } from '@/helpers'
 import { SPORTS } from '@/types/Match.types'
 
 describe('matches - valid cases', () => {
@@ -70,8 +70,8 @@ describe('matches - valid cases', () => {
       score: '2:1',
     }
 
-    const name = useFormatName(match)
-    const score = useFormatScore(match)
+    const name = formatMatchName(match)
+    const score = formatMatchScore(match)
     const parsedMatch: MatchOutputDto = { name, score }
 
     expect(parsedMatch).toEqual({
@@ -99,8 +99,8 @@ describe('matches - valid cases', () => {
     const parsedMatches: MatchOutputDto[] = matches
       .filter(isValidMatch)
       .map((match: MatchDto): MatchOutputDto => ({
-        name: useFormatName(match),
-        score: useFormatScore(match),
+        name: formatMatchName(match),
+        score: formatMatchScore(match),
       }))
 
     expect(parsedMatches).toHaveLength(2)

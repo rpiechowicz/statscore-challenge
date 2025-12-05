@@ -1,8 +1,8 @@
 import type { MatchDto } from '@/types/Match.types'
-import { INVALID_MATCH_MESSAGE } from '@/consts/invalidts.consts'
+import { INVALID_MATCH_MESSAGE } from '@/consts/invalid.consts'
 import { SPORTS } from '@/types/Match.types'
 
-export default function useFormatName(match: MatchDto): string {
+export default function formatMatchName(match: MatchDto): string {
   if (!match.participant1 || !match.participant2) {
     return INVALID_MATCH_MESSAGE
   }

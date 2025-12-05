@@ -1,10 +1,10 @@
 import type { MatchDto } from '@/types/Match.types'
 import { describe, expect, it } from 'vitest'
-import { INVALID_MATCH_MESSAGE } from '@/consts/invalidts.consts'
-import useFormatName from '@/helpers/formatName'
+import { INVALID_MATCH_MESSAGE } from '@/consts/invalid.consts'
+import formatMatchName from '@/helpers/formatName'
 import { SPORTS } from '@/types/Match.types'
 
-describe('useFormatName - invalid cases', () => {
+describe('formatMatchName - invalid cases', () => {
   it('should return invalid message when participant1 is missing', () => {
     const match: MatchDto = {
       sport: SPORTS.SOCCER,
@@ -12,7 +12,7 @@ describe('useFormatName - invalid cases', () => {
       score: '2:1',
     }
 
-    expect(useFormatName(match)).toBe(INVALID_MATCH_MESSAGE)
+    expect(formatMatchName(match)).toBe(INVALID_MATCH_MESSAGE)
   })
 
   it('should return invalid message when participant2 is missing', () => {
@@ -22,7 +22,7 @@ describe('useFormatName - invalid cases', () => {
       score: '2:1',
     }
 
-    expect(useFormatName(match)).toBe(INVALID_MATCH_MESSAGE)
+    expect(formatMatchName(match)).toBe(INVALID_MATCH_MESSAGE)
   })
 
   it('should return invalid message when both participants are missing', () => {
@@ -30,7 +30,7 @@ describe('useFormatName - invalid cases', () => {
       sport: SPORTS.SKI_JUMPING,
     }
 
-    expect(useFormatName(match)).toBe(INVALID_MATCH_MESSAGE)
+    expect(formatMatchName(match)).toBe(INVALID_MATCH_MESSAGE)
   })
 
   it('should return invalid message for unknown sport', () => {
@@ -41,7 +41,7 @@ describe('useFormatName - invalid cases', () => {
       score: '1:0',
     } as unknown as MatchDto
 
-    expect(useFormatName(match)).toBe(INVALID_MATCH_MESSAGE)
+    expect(formatMatchName(match)).toBe(INVALID_MATCH_MESSAGE)
   })
 
   it('should return invalid message when participant1 is empty string', () => {
@@ -52,7 +52,7 @@ describe('useFormatName - invalid cases', () => {
       score: '2:1',
     }
 
-    expect(useFormatName(match)).toBe(INVALID_MATCH_MESSAGE)
+    expect(formatMatchName(match)).toBe(INVALID_MATCH_MESSAGE)
   })
 
   it('should return invalid message when participant2 is empty string', () => {
@@ -63,6 +63,6 @@ describe('useFormatName - invalid cases', () => {
       score: '2:1',
     }
 
-    expect(useFormatName(match)).toBe(INVALID_MATCH_MESSAGE)
+    expect(formatMatchName(match)).toBe(INVALID_MATCH_MESSAGE)
   })
 })

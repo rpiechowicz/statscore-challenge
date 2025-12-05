@@ -1,5 +1,5 @@
 import type { MatchDto } from '@/types/Match.types'
-import { INVALID_MATCH_MESSAGE, INVALID_SCORE_MESSAGE } from '@/consts/invalidts.consts'
+import { INVALID_MATCH_MESSAGE, INVALID_SCORE_MESSAGE } from '@/consts/invalid.consts'
 import { MATCH_SCORE_REGEXP } from '@/consts/regexp.consts'
 import { SPORTS } from '@/types/Match.types'
 
@@ -27,7 +27,11 @@ function formatSimpleScore(score: string): string {
 }
 
 function formatScoreWithMatches(score: string[][]): string {
-  return score.map((match: string[]) => match.join(',')).join(',')
+  if (!Array.isArray(score) || score.length === 0) {
+    return INVALID_SCORE_MESSAGE
+  }
+
+  return score.map((match: string[]): string => match.join(',')).join(',')
 }
 
 function formatScoreWithSets(score: string): string {

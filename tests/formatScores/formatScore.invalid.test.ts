@@ -1,10 +1,10 @@
 import type { MatchDto } from '@/types/Match.types'
 import { describe, expect, it } from 'vitest'
-import { INVALID_MATCH_MESSAGE, INVALID_SCORE_MESSAGE } from '@/consts/invalidts.consts'
-import useFormatScore from '@/helpers/formatScore'
+import { INVALID_MATCH_MESSAGE, INVALID_SCORE_MESSAGE } from '@/consts/invalid.consts'
+import formatMatchScore from '@/helpers/formatScore'
 import { SPORTS } from '@/types/Match.types'
 
-describe('useFormatScore - invalid cases', () => {
+describe('formatMatchScore - invalid cases', () => {
   it('should return invalid message when score is missing', () => {
     const match: MatchDto = {
       sport: SPORTS.SOCCER,
@@ -12,7 +12,7 @@ describe('useFormatScore - invalid cases', () => {
       participant2: 'Team B',
     }
 
-    expect(useFormatScore(match)).toBe(INVALID_SCORE_MESSAGE)
+    expect(formatMatchScore(match)).toBe(INVALID_SCORE_MESSAGE)
   })
 
   it('should return invalid message when score is empty string', () => {
@@ -23,7 +23,7 @@ describe('useFormatScore - invalid cases', () => {
       score: '',
     }
 
-    expect(useFormatScore(match)).toBe(INVALID_SCORE_MESSAGE)
+    expect(formatMatchScore(match)).toBe(INVALID_SCORE_MESSAGE)
   })
 
   it('should return invalid message for unknown sport', () => {
@@ -34,7 +34,7 @@ describe('useFormatScore - invalid cases', () => {
       score: '1:0',
     } as unknown as MatchDto
 
-    expect(useFormatScore(match)).toBe(INVALID_MATCH_MESSAGE)
+    expect(formatMatchScore(match)).toBe(INVALID_MATCH_MESSAGE)
   })
 
   it('should return invalid message when tennis score has invalid format', () => {
@@ -45,7 +45,7 @@ describe('useFormatScore - invalid cases', () => {
       score: 'invalid-format',
     }
 
-    expect(useFormatScore(match)).toBe(INVALID_SCORE_MESSAGE)
+    expect(formatMatchScore(match)).toBe(INVALID_SCORE_MESSAGE)
   })
 
   it('should return invalid message when volleyball score has invalid format', () => {
@@ -56,7 +56,7 @@ describe('useFormatScore - invalid cases', () => {
       score: 'not-valid-score',
     }
 
-    expect(useFormatScore(match)).toBe(INVALID_SCORE_MESSAGE)
+    expect(formatMatchScore(match)).toBe(INVALID_SCORE_MESSAGE)
   })
 
   it('should return invalid message when tennis score has too few sets', () => {
@@ -67,6 +67,28 @@ describe('useFormatScore - invalid cases', () => {
       score: '2:1,7:6',
     }
 
-    expect(useFormatScore(match)).toBe(INVALID_SCORE_MESSAGE)
+    expect(formatMatchScore(match)).toBe(INVALID_SCORE_MESSAGE)
+  })
+
+  it('should return invalid message when basketball score is not an array', () => {
+    const match: MatchDto = {
+      sport: SPORTS.BASKETBALL,
+      participant1: 'Team A',
+      participant2: 'Team B',
+      score: 'not-an-array' as unknown as string[][],
+    }
+
+    expect(formatMatchScore(match)).toBe(INVALID_SCORE_MESSAGE)
+  })
+
+  it('should return invalid message when basketball score is empty array', () => {
+    const match: MatchDto = {
+      sport: SPORTS.BASKETBALL,
+      participant1: 'Team A',
+      participant2: 'Team B',
+      score: [],
+    }
+
+    expect(formatMatchScore(match)).toBe(INVALID_SCORE_MESSAGE)
   })
 })
